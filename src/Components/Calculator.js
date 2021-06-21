@@ -5,21 +5,39 @@ import CalculateTime from './CalculateTime.js'
 export default class Calculator extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             money: ''
+            salary: '',
+            cost: ''
         }
     }
-    
-    handleInputChange = (money) => {
-        this.setState(Object.assign({}, {money}))
+
+    handleInputChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     }
 
     render() {
+        const salary = this.state.salary;
+        const cost = this.state.cost;
         return (
             <div>
-                <MoneyInput money={this.state.money} onInputChange={this.handleInputChange} />
-                <CalculateTime money={this.state.money} />
+                <MoneyInput
+                    howMuch = { salary }
+                    name = 'salary'
+                    onInputChange = { this.handleInputChange } 
+                />
+
+                <MoneyInput
+                    howMuch = { cost }
+                    name = 'cost'
+                    onInputChange = { this.handleInputChange }
+                />
+                <CalculateTime 
+                    salary = { salary } 
+                    cost = { cost }
+                />
             </div>
         )
     }
